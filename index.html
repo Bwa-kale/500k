@@ -87,8 +87,9 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
   .refresh-btn:hover { background: var(--burgundy-light); border-color: var(--white); }
+  .refresh-btn:disabled { opacity: .5; cursor: default; }
 
-  /* Goal Card */
+  /* Milestone Progress Bar */
   .goal-card {
     background: var(--panel);
     border: 1px solid var(--panel-border-bright);
@@ -101,10 +102,10 @@
   .goal-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; }
   .goal-title { font-size: 12px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 2px; }
   .goal-pct { font-family: 'Orbitron', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent-gold); }
-  .goal-bar-wrap { width: 100%; height: 16px; background: rgba(0,0,0,0.4); border-radius: 10px; border: 1px solid var(--panel-border); overflow: hidden; }
+  .goal-bar-wrap { width: 100%; height: 16px; background: rgba(0,0,0,0.4); border-radius: 10px; border: 1px solid var(--panel-border); overflow: hidden; position: relative; }
   .goal-bar-fill { height: 100%; background: linear-gradient(90deg, var(--burgundy-glow), var(--accent-gold)); transition: width 0.6s ease; }
 
-  /* Hero Section */
+  /* Hero Portfolio Overview */
   .hero {
     background: var(--panel);
     border: 1px solid var(--panel-border-bright);
@@ -119,18 +120,26 @@
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   }
+  .hero::before {
+    content: ''; position: absolute; top: -40%; right: -10%; width: 340px; height: 340px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,31,66,0.25), transparent 70%); pointer-events: none;
+  }
+  .hero-left { position: relative; z-index: 1; }
   .hero-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--text-sub); text-transform: uppercase; margin-bottom: 6px; }
-  .hero-value { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 40px; color: var(--white); }
+  .hero-value { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 40px; color: var(--white); text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
   .hero-pl { font-family: 'JetBrains Mono', monospace; font-size: 15px; margin-top: 8px; }
   .pos { color: var(--green); } .neg { color: var(--red); } .neu { color: var(--text-sub); }
 
+  .alloc { position: relative; z-index: 1; }
   .alloc-bar { display: flex; width: 100%; height: 14px; border-radius: 8px; overflow: hidden; background: rgba(255, 255, 255, 0.08); margin-bottom: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
   .alloc-seg { height: 100%; transition: width .4s ease; }
   .alloc-legend { display: flex; flex-direction: column; gap: 6px; }
   .alloc-row { display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
   .alloc-row .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+  .alloc-name { display: flex; align-items: center; color: var(--text-sub); }
+  .alloc-pct { color: var(--white); font-weight: 700; }
 
-  /* Growth Simulator Component */
+  /* Growth Simulator Card */
   .sim-card {
     background: var(--panel);
     border: 1px solid var(--panel-border-bright);
@@ -140,15 +149,17 @@
     backdrop-filter: blur(20px);
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     position: relative;
+    overflow: hidden;
   }
+  .sim-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent-gold), var(--burgundy-glow), var(--accent-gold)); }
   .sim-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
   .sim-title { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--white); }
-  .sim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .sim-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 22px; }
   @media(max-width: 820px) { .sim-grid { grid-template-columns: 1fr; } }
 
   .sim-input-group { background: rgba(0,0,0,0.3); border: 1px solid var(--panel-border); border-radius: 12px; padding: 14px; }
   .sim-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-sub); text-transform: uppercase; margin-bottom: 8px; display: block; }
-  .sim-input { background: rgba(0,0,0,0.4); border: 1px solid var(--panel-border-bright); color: var(--white); font-family: 'JetBrains Mono', monospace; font-size: 14px; padding: 8px 12px; border-radius: 8px; width: 100%; }
+  .sim-input { background: rgba(0,0,0,0.4); border: 1px solid var(--panel-border-bright); color: var(--white); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 8px 12px; border-radius: 8px; width: 100%; }
 
   .sim-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; background: rgba(0,0,0,0.25); padding: 18px; border-radius: 12px; border: 1px solid var(--panel-border); margin-bottom: 20px; }
   @media(max-width: 600px) { .sim-results { grid-template-columns: 1fr; } }
@@ -156,7 +167,6 @@
   .sim-res-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-sub); text-transform: uppercase; margin-bottom: 6px; }
   .sim-res-val { font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 700; color: var(--white); }
 
-  /* Visual Bar Chart for Simulation */
   .chart-container { display: flex; align-items: flex-end; justify-content: space-between; height: 160px; padding-top: 20px; border-bottom: 1px solid var(--panel-border); gap: 8px; }
   .chart-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; }
   .chart-bar-wrap { width: 100%; background: rgba(0,0,0,0.3); border-radius: 6px 6px 0 0; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; position: relative; }
@@ -164,16 +174,45 @@
   .chart-bar-gain { background: linear-gradient(180deg, var(--accent-gold), var(--burgundy-glow)); width: 100%; transition: height 0.4s ease; }
   .chart-year { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-sub); }
 
+  /* 2026 NYC Tax Card */
+  .tax-card {
+    background: var(--panel); border: 1px solid var(--panel-border-bright); border-radius: 18px; backdrop-filter: blur(20px);
+    padding: 24px 28px; margin-bottom: 22px; position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .tax-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--burgundy-glow), var(--white), var(--burgundy-glow)); }
+  .tax-card-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; }
+  .wages-field { display: flex; align-items: center; gap: 10px; }
+  .tax-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px; }
+  @media(max-width:760px){ 
+    .tax-grid { grid-template-columns: repeat(2, 1fr); } 
+    h1 { font-size: 28px; }
+  }
+
+  .tax-stat { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--panel-border); border-radius: 10px; padding: 12px 14px; }
+  .tax-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .tax-stat-val { font-family: 'Orbitron', sans-serif; font-size: 17px; font-weight: 700; color: var(--white); }
+
+  .tax-total-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--panel-border); padding-top: 16px; margin-top: 4px; }
+  .tax-total-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; }
+  .tax-total-val { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: var(--red); }
+  .tax-net-val { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--green); }
+
+  .holding-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; margin-top: 8px; }
+  .holding-badge.lt { background: rgba(46, 204, 113, 0.15); color: var(--green); border: 1px solid rgba(46, 204, 113, 0.3); }
+  .holding-badge.st { background: rgba(255, 77, 109, 0.15); color: var(--red); border: 1px solid rgba(255, 77, 109, 0.3); }
+  .holding-badge.unknown { background: rgba(255, 255, 255, 0.08); color: var(--text-sub); border: 1px solid var(--panel-border); }
+  .holding-badge.hit { background: rgba(244, 208, 111, 0.2); color: var(--accent-gold); border: 1px solid var(--accent-gold); }
+
   /* Cards Grid */
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-  @media(max-width:760px){ .grid { grid-template-columns: 1fr; } .hero { grid-template-columns: 1fr; } h1 { font-size: 28px; } }
+  @media(max-width:760px){ .grid { grid-template-columns: 1fr; } .hero { grid-template-columns: 1fr; } }
 
   .card { background: var(--panel); border: 1px solid var(--panel-border-bright); border-radius: 16px; padding: 22px 24px; backdrop-filter: blur(16px); position: relative; overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
   .card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--white), var(--burgundy-glow)); }
   .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-  .sym { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 22px; color: var(--white); }
+  .sym { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: .5px; color: var(--white); }
   .name { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--text-sub); margin-top: 2px; }
-  .chain-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--white); background: var(--burgundy-main); border: 1px solid var(--burgundy-glow); padding: 3px 10px; border-radius: 20px; }
+  .chain-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--white); background: var(--burgundy-main); border: 1px solid var(--burgundy-glow); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; }
 
   .price-row { display: flex; align-items: baseline; gap: 10px; margin: 14px 0 6px; }
   .price { font-family: 'Orbitron', sans-serif; font-size: 26px; font-weight: 700; color: var(--white); }
@@ -184,12 +223,22 @@
   .divider { height: 1px; background: var(--panel-border); margin: 16px 0; }
 
   .field-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
-  .field-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-sub); text-transform: uppercase; }
+  .field-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; }
   .field-input { background: rgba(0, 0, 0, 0.35); border: 1px solid var(--panel-border-bright); color: var(--white); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 7px 10px; border-radius: 8px; width: 120px; text-align: right; }
+  .field-input:focus { outline: none; border-color: var(--white); background: rgba(0, 0, 0, 0.5); }
 
   .stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
   .stat-label { color: var(--text-sub); }
   .stat-val { font-weight: 700; color: var(--white); }
+
+  .ratio-wrap { display: flex; align-items: center; gap: 14px; margin-top: 16px; }
+  .ratio-ring { position: relative; width: 58px; height: 58px; flex-shrink: 0; }
+  .ratio-ring svg { transform: rotate(-90deg); }
+  .ratio-ring-bg { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 5; }
+  .ratio-ring-fg { fill: none; stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset .6s ease; }
+  .ratio-ring-txt { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: var(--white); }
+
+  .loading { color: var(--text-sub); font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 8px 0; }
 
   footer { text-align: center; margin-top: 35px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-sub); letter-spacing: 1px; }
 </style>
@@ -208,7 +257,7 @@
     </div>
   </header>
 
-  <!-- Goal Tracker -->
+  <!-- $500,000 Milestone Goal Tracker -->
   <div class="goal-card">
     <div class="goal-top">
       <span class="goal-title">🎯 Road to $500,000 Milestone</span>
@@ -221,12 +270,12 @@
 
   <!-- Hero Overview -->
   <div class="hero">
-    <div>
+    <div class="hero-left">
       <div class="hero-label">Total Portfolio Value</div>
       <div class="hero-value" id="totalValue">$0.00</div>
       <div class="hero-pl" id="totalPL">—</div>
     </div>
-    <div>
+    <div class="alloc">
       <div class="hero-label">Allocation</div>
       <div class="alloc-bar" id="allocBar"></div>
       <div class="alloc-legend" id="allocLegend"></div>
@@ -237,46 +286,61 @@
   <div class="sim-card">
     <div class="sim-header">
       <div class="sim-title">📈 Monthly DCA Growth Simulator</div>
-      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent-gold);">Total: $3,000/month</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--accent-gold);">Plan: $3,000 / Month Total</div>
     </div>
 
     <div class="sim-grid">
       <div class="sim-input-group">
         <label class="sim-label">QQQM Monthly ($)</label>
         <input class="sim-input" type="number" id="simQqqmDca" value="2000" step="100" oninput="runSimulation()">
-        <span class="sim-label" style="margin-top:10px;">Est. Return (CAGR %)</span>
+        <span class="sim-label" style="margin-top:10px;">Expected CAGR (%)</span>
         <input class="sim-input" type="number" id="simQqqmCagr" value="12" step="0.5" oninput="runSimulation()">
       </div>
 
       <div class="sim-input-group">
         <label class="sim-label">ASTS Monthly ($)</label>
         <input class="sim-input" type="number" id="simAstsDca" value="1000" step="100" oninput="runSimulation()">
-        <span class="sim-label" style="margin-top:10px;">Est. Return (CAGR %)</span>
+        <span class="sim-label" style="margin-top:10px;">Expected CAGR (%)</span>
         <input class="sim-input" type="number" id="simAstsCagr" value="25" step="0.5" oninput="runSimulation()">
       </div>
 
       <div class="sim-input-group">
-        <label class="sim-label">Projection Horizon (Years)</label>
+        <label class="sim-label">Timeframe (Years)</label>
         <input class="sim-input" type="number" id="simYears" value="5" min="1" max="15" oninput="runSimulation()">
       </div>
     </div>
 
     <div class="sim-results">
       <div class="sim-res-box">
-        <div class="sim-res-label">Total Out of Pocket</div>
+        <div class="sim-res-label">Out of Pocket</div>
         <div class="sim-res-val" id="resInvested">$0</div>
       </div>
       <div class="sim-res-box">
-        <div class="sim-res-label">Estimated Gains</div>
+        <div class="sim-res-label">Compound Gains</div>
         <div class="sim-res-val pos" id="resGains">$0</div>
       </div>
       <div class="sim-res-box">
-        <div class="sim-res-label">Projected Portfolio</div>
+        <div class="sim-res-label">Projected Total</div>
         <div class="sim-res-val" style="color:var(--accent-gold);" id="resTotal">$0</div>
       </div>
     </div>
 
     <div class="chart-container" id="simChart"></div>
+  </div>
+
+  <!-- 2026 Tax Impact Engine -->
+  <div class="tax-card">
+    <div class="tax-card-top">
+      <div>
+        <div class="hero-label">Tax Impact If Sold Today</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-sub);margin-top:2px;">Single filer · NYC resident · 2026 rates</div>
+      </div>
+      <div class="wages-field">
+        <span class="field-label">W-2 Income</span>
+        <input class="field-input" id="wagesInput" type="number" min="0" step="any" value="59800" onblur="onWagesBlur(this.value)">
+      </div>
+    </div>
+    <div id="taxBody"></div>
   </div>
 
   <div class="grid" id="cardGrid"></div>
@@ -289,13 +353,101 @@ const ASSETS = [
   { symbol: "QQQM", name: "Invesco NASDAQ 100 ETF", assetClass: "US ETF" },
   { symbol: "ASTS", name: "AST SpaceMobile, Inc.", assetClass: "US Equity" }
 ];
+
 const COLORS = ["#ffffff", "#c91f42"];
 const TARGET_GOAL = 500000;
-let state = {};
 
-function fmtUsd(n, decimals=0){
+// ── 2026 TAX ENGINE (single filer, NYC resident) ────────────────────────
+const FEDERAL_STD_DEDUCTION_SINGLE = 16100;
+const NY_STD_DEDUCTION_SINGLE = 8000;
+const NIIT_THRESHOLD_SINGLE = 200000;
+const NIIT_RATE = 0.038;
+
+const FEDERAL_ORDINARY_2026 = [
+  [0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24],
+  [201775, 0.32], [256225, 0.35], [640600, 0.37]
+];
+const FEDERAL_LTCG_2026 = [
+  [0, 0.00], [49450, 0.15], [545500, 0.20]
+];
+const NY_STATE_2026 = [
+  [0, 0.039], [8500, 0.044], [11700, 0.0515], [13900, 0.054],
+  [80650, 0.059], [215400, 0.0685], [1077550, 0.0965],
+  [5000000, 0.103], [25000000, 0.109]
+];
+const NYC_RESIDENT_2026 = [
+  [0, 0.03078], [12000, 0.03762], [25000, 0.03819], [50000, 0.03876]
+];
+
+function bracketTax(income, brackets){
+  if(income <= 0) return 0;
+  let tax = 0;
+  for(let i=0; i<brackets.length; i++){
+    const [threshold, rate] = brackets[i];
+    const next = (i+1 < brackets.length) ? brackets[i+1][0] : Infinity;
+    if(income > threshold){
+      tax += (Math.min(income, next) - threshold) * rate;
+    } else break;
+  }
+  return tax;
+}
+
+function computeTaxImpact(wages, stGain, ltGain){
+  stGain = Math.max(0, stGain);
+  ltGain = Math.max(0, ltGain);
+
+  const fedBase = Math.max(0, wages - FEDERAL_STD_DEDUCTION_SINGLE);
+  const fedWithST = Math.max(0, wages + stGain - FEDERAL_STD_DEDUCTION_SINGLE);
+  const fedTaxOnST = bracketTax(fedWithST, FEDERAL_ORDINARY_2026) - bracketTax(fedBase, FEDERAL_ORDINARY_2026);
+  const fedTaxOnLT = bracketTax(fedWithST + ltGain, FEDERAL_LTCG_2026) - bracketTax(fedWithST, FEDERAL_LTCG_2026);
+  const federalTotal = fedTaxOnST + fedTaxOnLT;
+
+  const magi = wages + stGain + ltGain;
+  const nii = stGain + ltGain;
+  const niit = magi > NIIT_THRESHOLD_SINGLE ? NIIT_RATE * Math.min(nii, magi - NIIT_THRESHOLD_SINGLE) : 0;
+
+  const nyBase = Math.max(0, wages - NY_STD_DEDUCTION_SINGLE);
+  const nyWithGains = Math.max(0, wages + stGain + ltGain - NY_STD_DEDUCTION_SINGLE);
+  const nyTax = bracketTax(nyWithGains, NY_STATE_2026) - bracketTax(nyBase, NY_STATE_2026);
+  const nycTax = bracketTax(nyWithGains, NYC_RESIDENT_2026) - bracketTax(nyBase, NYC_RESIDENT_2026);
+
+  const totalTax = federalTotal + niit + nyTax + nycTax;
+  return { fedTaxOnST, fedTaxOnLT, federalTotal, niit, nyTax, nycTax, totalTax };
+}
+
+function daysHeld(purchaseDateStr){
+  if(!purchaseDateStr) return null;
+  const purchase = new Date(purchaseDateStr + "T00:00:00");
+  if(isNaN(purchase.getTime())) return null;
+  const diffMs = Date.now() - purchase.getTime();
+  return Math.floor(diffMs / 86400000);
+}
+
+function netCapitalGains(netST, netLT){
+  let st = netST, lt = netLT, netLoss = 0;
+  if(st < 0 && lt > 0){
+    if(lt + st >= 0){ lt = lt + st; st = 0; }
+    else { netLoss = -(lt + st); st = 0; lt = 0; }
+  } else if(lt < 0 && st > 0){
+    if(st + lt >= 0){ st = st + lt; lt = 0; }
+    else { netLoss = -(st + lt); st = 0; lt = 0; }
+  } else if(st < 0 && lt < 0){
+    netLoss = -(st + lt);
+    st = 0; lt = 0;
+  }
+  return { stGain: Math.max(0, st), ltGain: Math.max(0, lt), netLoss };
+}
+
+let state = {}; 
+let taxSettings = { wages: 59800 };
+
+function fmtUsd(n, decimals=2){
   if(n === null || n === undefined || isNaN(n)) return "—";
-  return "$" + Math.round(n).toLocaleString();
+  return "$" + n.toLocaleString(undefined,{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
+}
+function fmtNum(n, decimals=2){
+  if(n === null || n === undefined || isNaN(n)) return "—";
+  return n.toLocaleString(undefined,{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
 }
 
 function loadPersisted(){
@@ -305,12 +457,101 @@ function loadPersisted(){
       const raw = localStorage.getItem(key);
       if(raw){
         const parsed = JSON.parse(raw);
-        state[a.symbol] = { ...a, shares: parsed.shares ?? 0, cost: parsed.cost ?? 0 };
+        state[a.symbol] = { ...state[a.symbol], ...a, shares: parsed.shares ?? 0, cost: parsed.cost ?? 0, purchaseDate: parsed.purchaseDate ?? "", targetPrice: parsed.targetPrice ?? 0 };
       } else {
-        state[a.symbol] = { ...a, shares: 0, cost: 0 };
+        state[a.symbol] = { ...state[a.symbol], ...a, shares: 0, cost: 0, purchaseDate: "", targetPrice: 0 };
       }
-    }catch(e){ state[a.symbol] = { ...a, shares: 0, cost: 0 }; }
+    }catch(e){
+      state[a.symbol] = { ...state[a.symbol], ...a, shares: 0, cost: 0, purchaseDate: "", targetPrice: 0 };
+    }
   }
+  try{
+    const raw = localStorage.getItem("road-tax-settings");
+    if(raw) taxSettings = { ...taxSettings, ...JSON.parse(raw) };
+  }catch(e){}
+}
+
+function persist(symbol){
+  const key = "road-portfolio:" + symbol.toLowerCase();
+  const s = state[symbol];
+  try{
+    localStorage.setItem(key, JSON.stringify({ shares: s.shares, cost: s.cost, purchaseDate: s.purchaseDate, targetPrice: s.targetPrice }));
+  }catch(e){ console.error("storage save failed", e); }
+}
+
+function persistTaxSettings(){
+  try{
+    localStorage.setItem("road-tax-settings", JSON.stringify(taxSettings));
+  }catch(e){ console.error("storage save failed", e); }
+}
+
+async function fetchStockPrice(symbol){
+  const defaults = { QQQM: 212.50, ASTS: 28.40 };
+  try {
+    const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const json = await res.json();
+    const meta = json.chart.result[0].meta;
+    const price = meta.regularMarketPrice;
+    const prevClose = meta.chartPreviousClose || meta.previousClose;
+    const chg24 = prevClose ? ((price - prevClose) / prevClose) * 100 : 0;
+    return { price, chg24 };
+  } catch(e) {
+    try {
+      const res2 = await fetch(`https://corsproxy.io/?https://query2.finance.yahoo.com/v8/finance/chart/${symbol}`);
+      const json2 = await res2.json();
+      const meta = json2.chart.result[0].meta;
+      const price = meta.regularMarketPrice;
+      const prevClose = meta.chartPreviousClose || meta.previousClose;
+      const chg24 = prevClose ? ((price - prevClose) / prevClose) * 100 : 0;
+      return { price, chg24 };
+    } catch(e2) {
+      return { price: defaults[symbol] || 100.00, chg24: 0.00 };
+    }
+  }
+}
+
+async function refreshAll(){
+  const btn = document.getElementById('refreshBtn');
+  btn.disabled = true; btn.textContent = "⟳ SYNCING...";
+
+  for(const a of ASSETS){
+    const d = await fetchStockPrice(a.symbol);
+    if(d){
+      state[a.symbol] = { ...state[a.symbol], price: d.price, chg24: d.chg24, error: false };
+    } else {
+      state[a.symbol] = { ...state[a.symbol], error: true };
+    }
+    render();
+  }
+  document.getElementById('lastUpdated').textContent = "updated " + new Date().toLocaleTimeString();
+  btn.disabled = false; btn.textContent = "⟳ REFRESH PRICES";
+}
+
+function updateField(symbol, field, value){
+  if(field === 'purchaseDate'){
+    state[symbol][field] = value;
+  } else {
+    const num = parseFloat(value);
+    state[symbol][field] = isNaN(num) ? 0 : num;
+  }
+  persist(symbol);
+}
+
+function onFieldBlur(symbol, field, value){
+  updateField(symbol, field, value);
+  render();
+}
+
+function updateWages(value){
+  const num = parseFloat(value);
+  taxSettings.wages = isNaN(num) ? 0 : num;
+  persistTaxSettings();
+}
+
+function onWagesBlur(value){
+  updateWages(value);
+  render();
 }
 
 function runSimulation(){
@@ -345,11 +586,10 @@ function runSimulation(){
   const finalTotal = qValue + aValue;
   const finalGains = finalTotal - totalInvested;
 
-  document.getElementById('resInvested').textContent = fmtUsd(totalInvested);
-  document.getElementById('resGains').textContent = fmtUsd(finalGains);
-  document.getElementById('resTotal').textContent = fmtUsd(finalTotal);
+  document.getElementById('resInvested').textContent = fmtUsd(totalInvested, 0);
+  document.getElementById('resGains').textContent = fmtUsd(finalGains, 0);
+  document.getElementById('resTotal').textContent = fmtUsd(finalTotal, 0);
 
-  // Render Bar Chart
   const chartEl = document.getElementById('simChart');
   chartEl.innerHTML = "";
   const maxVal = Math.max(...yearlyData.map(d => d.totalVal));
@@ -362,7 +602,7 @@ function runSimulation(){
     const gainPct = ((d.totalVal - d.invested) / maxVal) * 100;
 
     col.innerHTML = `
-      <div class="chart-bar-wrap" title="Year ${d.year}: ${fmtUsd(d.totalVal)}">
+      <div class="chart-bar-wrap" title="Year ${d.year}: ${fmtUsd(d.totalVal, 0)}">
         <div class="chart-bar-gain" style="height: ${gainPct}%;"></div>
         <div class="chart-bar-invested" style="height: ${investedPct}%;"></div>
       </div>
@@ -373,22 +613,217 @@ function runSimulation(){
 }
 
 function render(){
-  let totalValue = 0;
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = "";
+
+  let totalValue = 0, totalCost = 0;
   ASSETS.forEach(a => {
     const s = state[a.symbol];
-    if(s && s.price && s.shares) totalValue += s.price * s.shares;
+    if(s && s.price && s.shares){
+      totalValue += s.price * s.shares;
+      totalCost += (s.cost || 0) * s.shares;
+    }
   });
 
+  // Goal Tracker
   const goalPct = Math.min(100, (totalValue / TARGET_GOAL) * 100);
   document.getElementById('goalFill').style.width = goalPct + "%";
-  document.getElementById('goalPct').textContent = goalPct.toFixed(1) + "%";
-  document.getElementById('totalValue').textContent = fmtUsd(totalValue);
+  document.getElementById('goalPct').textContent = fmtNum(goalPct, 2) + "%";
+
+  document.getElementById('totalValue').textContent = fmtUsd(totalValue, 2);
+  const plEl = document.getElementById('totalPL');
+  if(totalCost > 0){
+    const pl = totalValue - totalCost;
+    const plPct = (pl/totalCost)*100;
+    plEl.innerHTML = `<span class="${pl>=0?'pos':'neg'}">${pl>=0?'▲':'▼'} ${fmtUsd(Math.abs(pl),2)} (${plPct>=0?'+':''}${fmtNum(plPct,2)}%)</span> <span class="neu">unrealized</span>`;
+  } else {
+    plEl.innerHTML = `<span class="neu">add cost basis to track P&L</span>`;
+  }
+
+  // Tax Calculations
+  let netST = 0, netLT = 0, anyGainData = false;
+  ASSETS.forEach(a => {
+    const s = state[a.symbol];
+    if(!s || !s.price || !s.shares || !s.cost) return;
+    const pl = (s.price - s.cost) * s.shares;
+    const held = daysHeld(s.purchaseDate);
+    if(held === null) return;
+    anyGainData = true;
+    if(held > 365) netLT += pl; else netST += pl;
+  });
+
+  const taxBody = document.getElementById('taxBody');
+  if(!anyGainData){
+    taxBody.innerHTML = `<div class="loading">Add purchase dates and cost bases to estimate potential exit taxes.</div>`;
+  } else {
+    const netted = netCapitalGains(netST, netLT);
+    const lossDeduction = Math.min(3000, netted.netLoss);
+    const effectiveWages = Math.max(0, taxSettings.wages - lossDeduction);
+    const impact = computeTaxImpact(effectiveWages, netted.stGain, netted.ltGain);
+    const totalGain = netted.stGain + netted.ltGain;
+    const netAfterTax = totalGain - impact.totalTax;
+    const effRate = totalGain > 0 ? (impact.totalTax/totalGain)*100 : 0;
+
+    taxBody.innerHTML = `
+      <div class="tax-grid">
+        <div class="tax-stat">
+          <div class="tax-stat-label">Net Short-Term</div>
+          <div class="tax-stat-val ${netST<0?'neg':''}">${netST<0?'-':''}${fmtUsd(Math.abs(netST),2)}</div>
+        </div>
+        <div class="tax-stat">
+          <div class="tax-stat-label">Net Long-Term</div>
+          <div class="tax-stat-val ${netLT<0?'neg':''}">${netLT<0?'-':''}${fmtUsd(Math.abs(netLT),2)}</div>
+        </div>
+        <div class="tax-stat">
+          <div class="tax-stat-label">Federal Tax</div>
+          <div class="tax-stat-val">${fmtUsd(impact.federalTotal,2)}</div>
+        </div>
+        <div class="tax-stat">
+          <div class="tax-stat-label">NYS + NYC Tax</div>
+          <div class="tax-stat-val">${fmtUsd(impact.nyTax + impact.nycTax,2)}</div>
+        </div>
+      </div>
+      <div class="tax-total-row">
+        <div>
+          <div class="tax-total-label">Estimated Tax Owed</div>
+          <div class="tax-total-val">${fmtUsd(impact.totalTax,2)}</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="tax-total-label">Net Gain After Tax (${fmtNum(effRate,1)}%)</div>
+          <div class="tax-net-val">${fmtUsd(netAfterTax,2)}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Allocation Bar
+  const allocBar = document.getElementById('allocBar');
+  const allocLegend = document.getElementById('allocLegend');
+  allocBar.innerHTML = ""; allocLegend.innerHTML = "";
+
+  ASSETS.forEach((a, i) => {
+    const s = state[a.symbol];
+    const value = (s && s.price && s.shares) ? s.price*s.shares : 0;
+    const pct = totalValue > 0 ? (value/totalValue)*100 : 0;
+
+    const seg = document.createElement('div');
+    seg.className = 'alloc-seg';
+    seg.style.width = pct + "%";
+    seg.style.background = COLORS[i % COLORS.length];
+    allocBar.appendChild(seg);
+
+    const row = document.createElement('div');
+    row.className = 'alloc-row';
+    row.innerHTML = `
+      <span class="alloc-name"><span class="dot" style="background:${COLORS[i%COLORS.length]}"></span>${a.symbol}</span>
+      <span class="alloc-pct">${fmtNum(pct,1)}%</span>
+    `;
+    allocLegend.appendChild(row);
+  });
+
+  // Asset Cards
+  ASSETS.forEach((a, i) => {
+    const s = state[a.symbol] || {};
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const hasPrice = !!s.price;
+    const value = (s.price && s.shares) ? s.price*s.shares : 0;
+    const cost = (s.cost && s.shares) ? s.cost*s.shares : 0;
+    const pl = value - cost;
+    const plPct = cost > 0 ? (pl/cost)*100 : null;
+    const pct = totalValue > 0 ? (value/totalValue)*100 : 0;
+    const circumference = 2*Math.PI*24;
+    const offset = circumference - (pct/100)*circumference;
+    const chg = s.chg24;
+
+    const held = daysHeld(s.purchaseDate);
+    let badgeHtml = `<span class="holding-badge unknown">Add purchase date</span>`;
+    
+    if(held !== null){
+      const isLT = held > 365;
+      badgeHtml = `<span class="holding-badge ${isLT?'lt':'st'}">${isLT?'Long-Term':'Short-Term'} · ${held}d held</span>`;
+    }
+
+    const hitTarget = s.targetPrice > 0 && s.price >= s.targetPrice;
+    if(hitTarget) {
+      badgeHtml += ` <span class="holding-badge hit">🎯 Target Triggered!</span>`;
+    }
+
+    const projVal = (s.targetPrice && s.shares) ? s.targetPrice * s.shares : 0;
+
+    card.innerHTML = `
+      <div class="card-top">
+        <div>
+          <div class="sym">${a.symbol}</div>
+          <div class="name">${a.name}</div>
+        </div>
+        <div class="chain-tag">${a.assetClass}</div>
+      </div>
+
+      <div class="price-row">
+        <div class="price">${hasPrice ? fmtUsd(s.price) : '···'}</div>
+        ${chg !== undefined && chg !== null ? `<div class="chg ${chg>=0?'pos':'neg'}">${chg>=0?'+':''}${fmtNum(chg,2)}%</div>` : ''}
+      </div>
+      ${badgeHtml}
+
+      <div class="divider"></div>
+
+      <div class="field-row">
+        <span class="field-label">Shares Held</span>
+        <input class="field-input" type="number" min="0" step="any" value="${s.shares || 0}" onblur="onFieldBlur('${a.symbol}', 'shares', this.value)">
+      </div>
+      <div class="field-row">
+        <span class="field-label">Avg Cost / Share</span>
+        <input class="field-input" type="number" min="0" step="any" value="${s.cost || 0}" onblur="onFieldBlur('${a.symbol}', 'cost', this.value)">
+      </div>
+      <div class="field-row">
+        <span class="field-label">Target Exit Price</span>
+        <input class="field-input" type="number" min="0" step="any" value="${s.targetPrice || 0}" onblur="onFieldBlur('${a.symbol}', 'targetPrice', this.value)">
+      </div>
+      <div class="field-row">
+        <span class="field-label">Purchase Date</span>
+        <input class="field-input" type="date" value="${s.purchaseDate || ''}" onblur="onFieldBlur('${a.symbol}', 'purchaseDate', this.value)" style="width:130px;">
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="stat-row"><span class="stat-label">Market Value</span><span class="stat-val">${hasPrice ? fmtUsd(value,2) : '—'}</span></div>
+      <div class="stat-row"><span class="stat-label">Projected Value at Target</span><span class="stat-val" style="color:var(--accent-gold);">${projVal > 0 ? fmtUsd(projVal,2) : '—'}</span></div>
+      <div class="stat-row">
+        <span class="stat-label">P&L</span>
+        <span class="stat-val ${plPct===null?'neu':(pl>=0?'pos':'neg')}">
+          ${(!hasPrice || plPct===null) ? '—' : `${pl>=0?'+':''}${fmtUsd(pl,2)} (${plPct>=0?'+':''}${fmtNum(plPct,2)}%)`}
+        </span>
+      </div>
+
+      <div class="ratio-wrap">
+        <div class="ratio-ring">
+          <svg width="58" height="58">
+            <circle class="ratio-ring-bg" cx="29" cy="29" r="24"></circle>
+            <circle class="ratio-ring-fg" cx="29" cy="29" r="24"
+              stroke="${COLORS[i%COLORS.length]}"
+              stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"></circle>
+          </svg>
+          <div class="ratio-ring-txt">${fmtNum(pct,0)}%</div>
+        </div>
+        <div>
+          <div class="ratio-label">Portfolio Weight</div>
+          <div class="ratio-sub">${a.symbol} proportion</div>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   loadPersisted();
   runSimulation();
   render();
+  refreshAll();
+  setInterval(refreshAll, 60000);
+  document.getElementById('refreshBtn').addEventListener('click', refreshAll);
 });
 </script>
 </body>
