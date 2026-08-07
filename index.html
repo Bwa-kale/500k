@@ -41,7 +41,6 @@
 
   .wrap { max-width: 1100px; margin: 0 auto; }
 
-  /* Centered Header */
   header {
     display: flex;
     flex-direction: column;
@@ -120,10 +119,6 @@
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   }
-  .hero::before {
-    content: ''; position: absolute; top: -40%; right: -10%; width: 340px; height: 340px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,31,66,0.25), transparent 70%); pointer-events: none;
-  }
   .hero-left { position: relative; z-index: 1; }
   .hero-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--text-sub); text-transform: uppercase; margin-bottom: 6px; }
   .hero-value { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 40px; color: var(--white); text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
@@ -139,7 +134,7 @@
   .alloc-name { display: flex; align-items: center; color: var(--text-sub); }
   .alloc-pct { color: var(--white); font-weight: 700; }
 
-  /* Growth Simulator Card */
+  /* DCA Growth Simulator */
   .sim-card {
     background: var(--panel);
     border: 1px solid var(--panel-border-bright);
@@ -174,6 +169,57 @@
   .chart-bar-gain { background: linear-gradient(180deg, var(--accent-gold), var(--burgundy-glow)); width: 100%; transition: height 0.4s ease; }
   .chart-year { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-sub); }
 
+  /* Uncle Sam Buy Entry & Tax Lot Card */
+  .sam-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-border-bright);
+    border-radius: 18px;
+    padding: 26px 28px;
+    margin-bottom: 22px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .sam-card::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    width: 260px;
+    height: 260px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/1d/Unclesamwhatsapp.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .sam-title { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .sam-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-sub); margin-bottom: 18px; }
+
+  .lot-form-grid { display: grid; grid-template-columns: repeat(5, 1fr) auto; gap: 10px; margin-bottom: 18px; align-items: end; }
+  @media(max-width:880px){ .lot-form-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .btn-add {
+    background: var(--burgundy-glow);
+    border: none;
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .btn-add:hover { background: var(--burgundy-light); }
+
+  .lot-table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 12px; margin-top: 10px; }
+  .lot-table th { text-align: left; padding: 10px; color: var(--text-sub); border-bottom: 1px solid var(--panel-border); text-transform: uppercase; font-size: 10px; }
+  .lot-table td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--white); }
+  .btn-del { background: transparent; border: 1px solid var(--red); color: var(--red); border-radius: 6px; padding: 2px 8px; cursor: pointer; font-size: 10px; }
+  .btn-del:hover { background: var(--red); color: var(--white); }
+
   /* 2026 NYC Tax Card */
   .tax-card {
     background: var(--panel); border: 1px solid var(--panel-border-bright); border-radius: 18px; backdrop-filter: blur(20px);
@@ -197,13 +243,11 @@
   .tax-total-val { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: var(--red); }
   .tax-net-val { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: var(--green); }
 
-  .holding-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; margin-top: 8px; }
+  .holding-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; margin-top: 2px; }
   .holding-badge.lt { background: rgba(46, 204, 113, 0.15); color: var(--green); border: 1px solid rgba(46, 204, 113, 0.3); }
   .holding-badge.st { background: rgba(255, 77, 109, 0.15); color: var(--red); border: 1px solid rgba(255, 77, 109, 0.3); }
-  .holding-badge.unknown { background: rgba(255, 255, 255, 0.08); color: var(--text-sub); border: 1px solid var(--panel-border); }
-  .holding-badge.hit { background: rgba(244, 208, 111, 0.2); color: var(--accent-gold); border: 1px solid var(--accent-gold); }
 
-  /* Cards Grid */
+  /* Asset Cards Grid */
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
   @media(max-width:760px){ .grid { grid-template-columns: 1fr; } .hero { grid-template-columns: 1fr; } }
 
@@ -225,7 +269,6 @@
   .field-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
   .field-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; }
   .field-input { background: rgba(0, 0, 0, 0.35); border: 1px solid var(--panel-border-bright); color: var(--white); font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 7px 10px; border-radius: 8px; width: 120px; text-align: right; }
-  .field-input:focus { outline: none; border-color: var(--white); background: rgba(0, 0, 0, 0.5); }
 
   .stat-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
   .stat-label { color: var(--text-sub); }
@@ -237,8 +280,6 @@
   .ratio-ring-bg { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 5; }
   .ratio-ring-fg { fill: none; stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset .6s ease; }
   .ratio-ring-txt { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: var(--white); }
-
-  .loading { color: var(--text-sub); font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 8px 0; }
 
   footer { text-align: center; margin-top: 35px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-sub); letter-spacing: 1px; }
 </style>
@@ -252,12 +293,12 @@
       <h1>$3,000 TO $500K ROAD</h1>
     </div>
     <div class="meta-controls">
-      <button class="refresh-btn" id="refreshBtn">⟳ REFRESH PRICES</button>
+      <button class="refresh-btn" id="refreshBtn" onclick="fetchAllPrices()">⟳ REFRESH PRICES</button>
       <div class="meta" id="lastUpdated">not yet updated</div>
     </div>
   </header>
 
-  <!-- $500,000 Milestone Goal Tracker -->
+  <!-- Milestone Goal Tracker -->
   <div class="goal-card">
     <div class="goal-top">
       <span class="goal-title">🎯 Road to $500,000 Milestone</span>
@@ -268,7 +309,7 @@
     </div>
   </div>
 
-  <!-- Hero Overview -->
+  <!-- Hero Portfolio Overview -->
   <div class="hero">
     <div class="hero-left">
       <div class="hero-label">Total Portfolio Value</div>
@@ -282,7 +323,7 @@
     </div>
   </div>
 
-  <!-- Growth Simulator Component -->
+  <!-- Growth Simulator Card -->
   <div class="sim-card">
     <div class="sim-header">
       <div class="sim-title">📈 Monthly DCA Growth Simulator</div>
@@ -328,7 +369,58 @@
     <div class="chart-container" id="simChart"></div>
   </div>
 
-  <!-- 2026 Tax Impact Engine -->
+  <!-- Buy Entry & Tax Lot Tracker (Uncle Sam Theme) -->
+  <div class="sam-card">
+    <div class="sam-title">📜 Uncle Sam's Buy Lot & Dividend Log</div>
+    <div class="sam-sub">Log individual purchases and dividend payouts for precise cost-basis lot tracking and tax season reporting.</div>
+
+    <div class="lot-form-grid">
+      <div>
+        <label class="sim-label">Asset</label>
+        <select class="sim-input" id="lotAsset">
+          <option value="QQQM">QQQM</option>
+          <option value="ASTS">ASTS</option>
+          <option value="FSOL">FSOL</option>
+          <option value="FETH">FETH</option>
+        </select>
+      </div>
+      <div>
+        <label class="sim-label">Buy Date</label>
+        <input class="sim-input" type="date" id="lotDate">
+      </div>
+      <div>
+        <label class="sim-label">Shares</label>
+        <input class="sim-input" type="number" id="lotShares" placeholder="0">
+      </div>
+      <div>
+        <label class="sim-label">Price Paid ($)</label>
+        <input class="sim-input" type="number" id="lotPrice" placeholder="0.00" step="any">
+      </div>
+      <div>
+        <label class="sim-label">Qtr Div ($/sh)</label>
+        <input class="sim-input" type="number" id="lotDiv" placeholder="0.00" step="any">
+      </div>
+      <button class="btn-add" onclick="addTaxLot()">+ ADD ENTRY</button>
+    </div>
+
+    <table class="lot-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Ticker</th>
+          <th>Shares</th>
+          <th>Cost/Sh</th>
+          <th>Total Cost</th>
+          <th>Holding Status</th>
+          <th>Est. Qtr Dividend</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="lotTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- 2026 NYC Tax Engine -->
   <div class="tax-card">
     <div class="tax-card-top">
       <div>
@@ -343,6 +435,7 @@
     <div id="taxBody"></div>
   </div>
 
+  <!-- Asset Cards Grid (Live Yahoo Prices) -->
   <div class="grid" id="cardGrid"></div>
 
   <footer>AUTOMATIC REFRESH EVERY 60S · DATA STORED PRIVATELY TO THIS VAULT</footer>
@@ -351,94 +444,16 @@
 <script>
 const ASSETS = [
   { symbol: "QQQM", name: "Invesco NASDAQ 100 ETF", assetClass: "US ETF" },
-  { symbol: "ASTS", name: "AST SpaceMobile, Inc.", assetClass: "US Equity" }
+  { symbol: "ASTS", name: "AST SpaceMobile, Inc.", assetClass: "US Equity" },
+  { symbol: "FSOL", name: "Solana Fund", assetClass: "Crypto Fund" },
+  { symbol: "FETH", name: "Ethereum Fund", assetClass: "Crypto Fund" }
 ];
 
-const COLORS = ["#ffffff", "#c91f42"];
+const COLORS = ["#ffffff", "#c91f42", "#f4d06f", "#2ecc71"];
 const TARGET_GOAL = 500000;
 
-// ── 2026 TAX ENGINE (single filer, NYC resident) ────────────────────────
-const FEDERAL_STD_DEDUCTION_SINGLE = 16100;
-const NY_STD_DEDUCTION_SINGLE = 8000;
-const NIIT_THRESHOLD_SINGLE = 200000;
-const NIIT_RATE = 0.038;
-
-const FEDERAL_ORDINARY_2026 = [
-  [0, 0.10], [12400, 0.12], [50400, 0.22], [105700, 0.24],
-  [201775, 0.32], [256225, 0.35], [640600, 0.37]
-];
-const FEDERAL_LTCG_2026 = [
-  [0, 0.00], [49450, 0.15], [545500, 0.20]
-];
-const NY_STATE_2026 = [
-  [0, 0.039], [8500, 0.044], [11700, 0.0515], [13900, 0.054],
-  [80650, 0.059], [215400, 0.0685], [1077550, 0.0965],
-  [5000000, 0.103], [25000000, 0.109]
-];
-const NYC_RESIDENT_2026 = [
-  [0, 0.03078], [12000, 0.03762], [25000, 0.03819], [50000, 0.03876]
-];
-
-function bracketTax(income, brackets){
-  if(income <= 0) return 0;
-  let tax = 0;
-  for(let i=0; i<brackets.length; i++){
-    const [threshold, rate] = brackets[i];
-    const next = (i+1 < brackets.length) ? brackets[i+1][0] : Infinity;
-    if(income > threshold){
-      tax += (Math.min(income, next) - threshold) * rate;
-    } else break;
-  }
-  return tax;
-}
-
-function computeTaxImpact(wages, stGain, ltGain){
-  stGain = Math.max(0, stGain);
-  ltGain = Math.max(0, ltGain);
-
-  const fedBase = Math.max(0, wages - FEDERAL_STD_DEDUCTION_SINGLE);
-  const fedWithST = Math.max(0, wages + stGain - FEDERAL_STD_DEDUCTION_SINGLE);
-  const fedTaxOnST = bracketTax(fedWithST, FEDERAL_ORDINARY_2026) - bracketTax(fedBase, FEDERAL_ORDINARY_2026);
-  const fedTaxOnLT = bracketTax(fedWithST + ltGain, FEDERAL_LTCG_2026) - bracketTax(fedWithST, FEDERAL_LTCG_2026);
-  const federalTotal = fedTaxOnST + fedTaxOnLT;
-
-  const magi = wages + stGain + ltGain;
-  const nii = stGain + ltGain;
-  const niit = magi > NIIT_THRESHOLD_SINGLE ? NIIT_RATE * Math.min(nii, magi - NIIT_THRESHOLD_SINGLE) : 0;
-
-  const nyBase = Math.max(0, wages - NY_STD_DEDUCTION_SINGLE);
-  const nyWithGains = Math.max(0, wages + stGain + ltGain - NY_STD_DEDUCTION_SINGLE);
-  const nyTax = bracketTax(nyWithGains, NY_STATE_2026) - bracketTax(nyBase, NY_STATE_2026);
-  const nycTax = bracketTax(nyWithGains, NYC_RESIDENT_2026) - bracketTax(nyBase, NYC_RESIDENT_2026);
-
-  const totalTax = federalTotal + niit + nyTax + nycTax;
-  return { fedTaxOnST, fedTaxOnLT, federalTotal, niit, nyTax, nycTax, totalTax };
-}
-
-function daysHeld(purchaseDateStr){
-  if(!purchaseDateStr) return null;
-  const purchase = new Date(purchaseDateStr + "T00:00:00");
-  if(isNaN(purchase.getTime())) return null;
-  const diffMs = Date.now() - purchase.getTime();
-  return Math.floor(diffMs / 86400000);
-}
-
-function netCapitalGains(netST, netLT){
-  let st = netST, lt = netLT, netLoss = 0;
-  if(st < 0 && lt > 0){
-    if(lt + st >= 0){ lt = lt + st; st = 0; }
-    else { netLoss = -(lt + st); st = 0; lt = 0; }
-  } else if(lt < 0 && st > 0){
-    if(st + lt >= 0){ st = st + lt; lt = 0; }
-    else { netLoss = -(st + lt); st = 0; lt = 0; }
-  } else if(st < 0 && lt < 0){
-    netLoss = -(st + lt);
-    st = 0; lt = 0;
-  }
-  return { stGain: Math.max(0, st), ltGain: Math.max(0, lt), netLoss };
-}
-
 let state = {}; 
+let taxLots = [];
 let taxSettings = { wages: 59800 };
 
 function fmtUsd(n, decimals=2){
@@ -450,108 +465,293 @@ function fmtNum(n, decimals=2){
   return n.toLocaleString(undefined,{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
 }
 
+function daysHeld(purchaseDateStr){
+  if(!purchaseDateStr) return null;
+  const purchase = new Date(purchaseDateStr + "T00:00:00");
+  if(isNaN(purchase.getTime())) return null;
+  return Math.floor((Date.now() - purchase.getTime()) / 86400000);
+}
+
+/* 2026 Tax Calc */
+function calcNycTax2026(wages, gain, isLongTerm){
+  if(gain <= 0) return { fedTax: 0, nysTax: 0, nycTax: 0, totalTax: 0, effectiveRate: 0, netGain: gain };
+  let fedRate = isLongTerm ? 0.15 : 0.22;
+  let nysRate = 0.055;
+  let nycRate = 0.03876;
+  
+  let fedTax = gain * fedRate;
+  let nysTax = gain * nysRate;
+  let nycTax = gain * nycRate;
+  let totalTax = fedTax + nysTax + nycTax;
+  
+  return {
+    fedTax, nysTax, nycTax, totalTax,
+    effectiveRate: (totalTax / gain) * 100,
+    netGain: gain - totalTax
+  };
+}
+
 function loadPersisted(){
-  for(const a of ASSETS){
+  ASSETS.forEach(a => {
     const key = "road-portfolio:" + a.symbol.toLowerCase();
-    try{
+    try {
       const raw = localStorage.getItem(key);
       if(raw){
         const parsed = JSON.parse(raw);
-        state[a.symbol] = { ...state[a.symbol], ...a, shares: parsed.shares ?? 0, cost: parsed.cost ?? 0, purchaseDate: parsed.purchaseDate ?? "", targetPrice: parsed.targetPrice ?? 0 };
+        state[a.symbol] = { ...a, shares: parsed.shares ?? 0, cost: parsed.cost ?? 0, purchaseDate: parsed.purchaseDate ?? "", targetPrice: parsed.targetPrice ?? 0 };
       } else {
-        state[a.symbol] = { ...state[a.symbol], ...a, shares: 0, cost: 0, purchaseDate: "", targetPrice: 0 };
+        state[a.symbol] = { ...a, shares: 0, cost: 0, purchaseDate: "", targetPrice: 0 };
       }
-    }catch(e){
-      state[a.symbol] = { ...state[a.symbol], ...a, shares: 0, cost: 0, purchaseDate: "", targetPrice: 0 };
+    } catch(e) {
+      state[a.symbol] = { ...a, shares: 0, cost: 0, purchaseDate: "", targetPrice: 0 };
     }
-  }
-  try{
-    const raw = localStorage.getItem("road-tax-settings");
-    if(raw) taxSettings = { ...taxSettings, ...JSON.parse(raw) };
-  }catch(e){}
-}
+  });
 
-function persist(symbol){
-  const key = "road-portfolio:" + symbol.toLowerCase();
-  const s = state[symbol];
-  try{
-    localStorage.setItem(key, JSON.stringify({ shares: s.shares, cost: s.cost, purchaseDate: s.purchaseDate, targetPrice: s.targetPrice }));
-  }catch(e){ console.error("storage save failed", e); }
-}
-
-function persistTaxSettings(){
-  try{
-    localStorage.setItem("road-tax-settings", JSON.stringify(taxSettings));
-  }catch(e){ console.error("storage save failed", e); }
-}
-
-async function fetchStockPrice(symbol){
-  const defaults = { QQQM: 212.50, ASTS: 28.40 };
   try {
-    const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`);
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    const json = await res.json();
-    const meta = json.chart.result[0].meta;
-    const price = meta.regularMarketPrice;
-    const prevClose = meta.chartPreviousClose || meta.previousClose;
-    const chg24 = prevClose ? ((price - prevClose) / prevClose) * 100 : 0;
-    return { price, chg24 };
+    const rawLots = localStorage.getItem("road-tax-lots");
+    if(rawLots) taxLots = JSON.parse(rawLots);
+  } catch(e){}
+}
+
+function saveAsset(symbol){
+  const st = state[symbol];
+  const key = "road-portfolio:" + symbol.toLowerCase();
+  localStorage.setItem(key, JSON.stringify({
+    shares: st.shares,
+    cost: st.cost,
+    purchaseDate: st.purchaseDate,
+    targetPrice: st.targetPrice
+  }));
+  recalc();
+}
+
+function persistTaxLots(){
+  try {
+    localStorage.setItem("road-tax-lots", JSON.stringify(taxLots));
+  } catch(e){}
+}
+
+function addTaxLot(){
+  const asset = document.getElementById('lotAsset').value;
+  const date = document.getElementById('lotDate').value;
+  const shares = parseFloat(document.getElementById('lotShares').value) || 0;
+  const price = parseFloat(document.getElementById('lotPrice').value) || 0;
+  const div = parseFloat(document.getElementById('lotDiv').value) || 0;
+
+  if(!date || shares <= 0 || price <= 0) return alert("Please fill in valid purchase details.");
+
+  taxLots.push({ id: Date.now(), asset, date, shares, price, div });
+  persistTaxLots();
+  renderLots();
+}
+
+function deleteTaxLot(id){
+  taxLots = taxLots.filter(l => l.id !== id);
+  persistTaxLots();
+  renderLots();
+}
+
+function renderLots(){
+  const tbody = document.getElementById('lotTableBody');
+  tbody.innerHTML = "";
+
+  taxLots.forEach(lot => {
+    const held = daysHeld(lot.date);
+    const isLT = held > 365;
+    const totalCost = lot.shares * lot.price;
+    const qtrDivTotal = lot.shares * lot.div;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${lot.date}</td>
+      <td><strong>${lot.asset}</strong></td>
+      <td>${fmtNum(lot.shares, 2)}</td>
+      <td>${fmtUsd(lot.price, 2)}</td>
+      <td>${fmtUsd(totalCost, 2)}</td>
+      <td><span class="holding-badge ${isLT?'lt':'st'}">${isLT?'Long-Term':'Short-Term'} (${held}d)</span></td>
+      <td>${fmtUsd(qtrDivTotal, 2)}</td>
+      <td><button class="btn-del" onclick="deleteTaxLot(${lot.id})">✕</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* Fetch Prices via Yahoo CORS Proxy */
+async function fetchPrice(symbol){
+  const proxy = "https://query1.finance.yahoo.com/v8/finance/chart/" + encodeURIComponent(symbol) + "?interval=1m&range=1d";
+  try {
+    const res = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent(proxy));
+    if(!res.ok) throw new Error();
+    const data = JSON.parse((await res.json()).contents);
+    const meta = data.chart.result[0].meta;
+    return {
+      price: meta.regularMarketPrice,
+      prevClose: meta.chartPreviousClose,
+      chg: meta.regularMarketPrice - meta.chartPreviousClose,
+      chgPct: ((meta.regularMarketPrice - meta.chartPreviousClose) / meta.chartPreviousClose) * 100
+    };
   } catch(e) {
-    try {
-      const res2 = await fetch(`https://corsproxy.io/?https://query2.finance.yahoo.com/v8/finance/chart/${symbol}`);
-      const json2 = await res2.json();
-      const meta = json2.chart.result[0].meta;
-      const price = meta.regularMarketPrice;
-      const prevClose = meta.chartPreviousClose || meta.previousClose;
-      const chg24 = prevClose ? ((price - prevClose) / prevClose) * 100 : 0;
-      return { price, chg24 };
-    } catch(e2) {
-      return { price: defaults[symbol] || 100.00, chg24: 0.00 };
-    }
+    return null;
   }
 }
 
-async function refreshAll(){
+async function fetchAllPrices(){
   const btn = document.getElementById('refreshBtn');
-  btn.disabled = true; btn.textContent = "⟳ SYNCING...";
+  btn.disabled = true;
+  btn.textContent = "FETCHING...";
 
   for(const a of ASSETS){
-    const d = await fetchStockPrice(a.symbol);
-    if(d){
-      state[a.symbol] = { ...state[a.symbol], price: d.price, chg24: d.chg24, error: false };
-    } else {
-      state[a.symbol] = { ...state[a.symbol], error: true };
+    const pData = await fetchPrice(a.symbol);
+    if(pData){
+      state[a.symbol].price = pData.price;
+      state[a.symbol].chg = pData.chg;
+      state[a.symbol].chgPct = pData.chgPct;
     }
-    render();
   }
-  document.getElementById('lastUpdated').textContent = "updated " + new Date().toLocaleTimeString();
-  btn.disabled = false; btn.textContent = "⟳ REFRESH PRICES";
+
+  document.getElementById('lastUpdated').textContent = "Updated " + new Date().toLocaleTimeString();
+  btn.disabled = false;
+  btn.textContent = "⟳ REFRESH PRICES";
+  renderCards();
+  recalc();
 }
 
-function updateField(symbol, field, value){
-  if(field === 'purchaseDate'){
-    state[symbol][field] = value;
-  } else {
-    const num = parseFloat(value);
-    state[symbol][field] = isNaN(num) ? 0 : num;
-  }
-  persist(symbol);
+function renderCards(){
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = "";
+
+  ASSETS.forEach((a, idx) => {
+    const st = state[a.symbol];
+    const curPrice = st.price ?? 0;
+    const mktVal = st.shares * curPrice;
+    const totalCost = st.shares * st.cost;
+    const pl = mktVal - totalCost;
+    const plPct = totalCost > 0 ? (pl / totalCost) * 100 : 0;
+    const chgClass = (st.chg || 0) >= 0 ? "pos" : "neg";
+    const chgSign = (st.chg || 0) >= 0 ? "+" : "";
+
+    const card = document.createElement('div');
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-top">
+        <div>
+          <div class="sym">${a.symbol}</div>
+          <div class="name">${a.name}</div>
+        </div>
+        <span class="chain-tag">${a.assetClass}</span>
+      </div>
+
+      <div class="price-row">
+        <div class="price">${fmtUsd(curPrice)}</div>
+        <div class="chg ${chgClass}">${chgSign}${fmtUsd(st.chg ?? 0)} (${chgSign}${(st.chgPct ?? 0).toFixed(2)}%)</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field-row">
+        <span class="field-label">Shares Owned</span>
+        <input class="field-input" type="number" step="any" value="${st.shares}" onchange="updateAssetField('${a.symbol}', 'shares', this.value)">
+      </div>
+
+      <div class="field-row">
+        <span class="field-label">Avg Cost ($)</span>
+        <input class="field-input" type="number" step="any" value="${st.cost}" onchange="updateAssetField('${a.symbol}', 'cost', this.value)">
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="stat-row">
+        <span class="stat-label">Market Value</span>
+        <span class="stat-val">${fmtUsd(mktVal)}</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Unrealized P/L</span>
+        <span class="stat-val ${pl >= 0 ? 'pos' : 'neg'}">${pl >= 0 ? '+' : ''}${fmtUsd(pl)} (${plPct.toFixed(2)}%)</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
 }
 
-function onFieldBlur(symbol, field, value){
-  updateField(symbol, field, value);
-  render();
+function updateAssetField(symbol, field, val){
+  state[symbol][field] = parseFloat(val) || 0;
+  saveAsset(symbol);
+  renderCards();
 }
 
-function updateWages(value){
-  const num = parseFloat(value);
-  taxSettings.wages = isNaN(num) ? 0 : num;
-  persistTaxSettings();
+function onWagesBlur(val){
+  taxSettings.wages = parseFloat(val) || 0;
+  recalc();
 }
 
-function onWagesBlur(value){
-  updateWages(value);
-  render();
+function recalc(){
+  let totVal = 0, totCost = 0, totGain = 0;
+
+  ASSETS.forEach(a => {
+    const st = state[a.symbol];
+    const val = st.shares * (st.price || 0);
+    totVal += val;
+    totCost += st.shares * st.cost;
+  });
+
+  totGain = totVal - totCost;
+
+  document.getElementById('totalValue').textContent = fmtUsd(totVal);
+  const plEl = document.getElementById('totalPL');
+  const plPct = totCost > 0 ? (totGain / totCost) * 100 : 0;
+  plEl.className = "hero-pl " + (totGain >= 0 ? "pos" : "neg");
+  plEl.textContent = `${totGain >= 0 ? '+' : ''}${fmtUsd(totGain)} (${plPct.toFixed(2)}% Total Gain)`;
+
+  // Goal Tracker
+  const goalPct = Math.min((totVal / TARGET_GOAL) * 100, 100);
+  document.getElementById('goalPct').textContent = goalPct.toFixed(1) + "%";
+  document.getElementById('goalFill').style.width = goalPct + "%";
+
+  // Allocation Bar
+  const allocBar = document.getElementById('allocBar');
+  const allocLeg = document.getElementById('allocLegend');
+  allocBar.innerHTML = ""; allocLeg.innerHTML = "";
+
+  ASSETS.forEach((a, idx) => {
+    const val = state[a.symbol].shares * (state[a.symbol].price || 0);
+    const pct = totVal > 0 ? (val / totVal) * 100 : 0;
+
+    const seg = document.createElement('div');
+    seg.className = "alloc-seg";
+    seg.style.width = pct + "%";
+    seg.style.background = COLORS[idx % COLORS.length];
+    allocBar.appendChild(seg);
+
+    const row = document.createElement('div');
+    row.className = "alloc-row";
+    row.innerHTML = `
+      <span class="alloc-name"><span class="dot" style="background:${COLORS[idx % COLORS.length]}"></span>${a.symbol}</span>
+      <span class="alloc-pct">${pct.toFixed(1)}%</span>
+    `;
+    allocLeg.appendChild(row);
+  });
+
+  // Tax Engine Recalc
+  const taxInfo = calcNycTax2026(taxSettings.wages, Math.max(0, totGain), false);
+  const taxBody = document.getElementById('taxBody');
+  taxBody.innerHTML = `
+    <div class="tax-grid">
+      <div class="tax-stat"><div class="tax-stat-label">Total Gain</div><div class="tax-stat-val pos">${fmtUsd(Math.max(0, totGain))}</div></div>
+      <div class="tax-stat"><div class="tax-stat-label">Federal Tax (15-22%)</div><div class="tax-stat-val neg">${fmtUsd(taxInfo.fedTax)}</div></div>
+      <div class="tax-stat"><div class="tax-stat-label">NYS Tax (~5.5%)</div><div class="tax-stat-val neg">${fmtUsd(taxInfo.nysTax)}</div></div>
+      <div class="tax-stat"><div class="tax-stat-label">NYC Tax (~3.88%)</div><div class="tax-stat-val neg">${fmtUsd(taxInfo.nycTax)}</div></div>
+    </div>
+    <div class="tax-total-row">
+      <div>
+        <div class="tax-total-label">Total Est. Tax Owed</div>
+        <div class="tax-total-val">${fmtUsd(taxInfo.totalTax)}</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="tax-total-label">Net Gain After Tax</div>
+        <div class="tax-net-val">${fmtUsd(taxInfo.netGain)}</div>
+      </div>
+    </div>
+  `;
 }
 
 function runSimulation(){
@@ -561,11 +761,7 @@ function runSimulation(){
   const aCagr = (parseFloat(document.getElementById('simAstsCagr').value) || 0) / 100;
   const years = parseInt(document.getElementById('simYears').value) || 5;
 
-  let totalInvested = 0;
-  let qValue = 0;
-  let aValue = 0;
-  let yearlyData = [];
-
+  let totalInvested = 0, qValue = 0, aValue = 0, yearlyData = [];
   const qRateM = Math.pow(1 + qCagr, 1/12) - 1;
   const aRateM = Math.pow(1 + aCagr, 1/12) - 1;
 
@@ -573,22 +769,12 @@ function runSimulation(){
     qValue = (qValue + qDca) * (1 + qRateM);
     aValue = (aValue + aDca) * (1 + aRateM);
     totalInvested += (qDca + aDca);
-
-    if(m % 12 === 0){
-      yearlyData.push({
-        year: m / 12,
-        invested: totalInvested,
-        totalVal: qValue + aValue
-      });
-    }
+    if(m % 12 === 0) yearlyData.push({ year: m / 12, invested: totalInvested, totalVal: qValue + aValue });
   }
 
-  const finalTotal = qValue + aValue;
-  const finalGains = finalTotal - totalInvested;
-
   document.getElementById('resInvested').textContent = fmtUsd(totalInvested, 0);
-  document.getElementById('resGains').textContent = fmtUsd(finalGains, 0);
-  document.getElementById('resTotal').textContent = fmtUsd(finalTotal, 0);
+  document.getElementById('resGains').textContent = fmtUsd((qValue + aValue) - totalInvested, 0);
+  document.getElementById('resTotal').textContent = fmtUsd(qValue + aValue, 0);
 
   const chartEl = document.getElementById('simChart');
   chartEl.innerHTML = "";
@@ -597,14 +783,10 @@ function runSimulation(){
   yearlyData.forEach(d => {
     const col = document.createElement('div');
     col.className = 'chart-col';
-
-    const investedPct = (d.invested / maxVal) * 100;
-    const gainPct = ((d.totalVal - d.invested) / maxVal) * 100;
-
     col.innerHTML = `
-      <div class="chart-bar-wrap" title="Year ${d.year}: ${fmtUsd(d.totalVal, 0)}">
-        <div class="chart-bar-gain" style="height: ${gainPct}%;"></div>
-        <div class="chart-bar-invested" style="height: ${investedPct}%;"></div>
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-gain" style="height: ${((d.totalVal - d.invested)/maxVal)*100}%;"></div>
+        <div class="chart-bar-invested" style="height: ${(d.invested/maxVal)*100}%;"></div>
       </div>
       <div class="chart-year">Y${d.year}</div>
     `;
@@ -612,218 +794,13 @@ function runSimulation(){
   });
 }
 
-function render(){
-  const grid = document.getElementById('cardGrid');
-  grid.innerHTML = "";
-
-  let totalValue = 0, totalCost = 0;
-  ASSETS.forEach(a => {
-    const s = state[a.symbol];
-    if(s && s.price && s.shares){
-      totalValue += s.price * s.shares;
-      totalCost += (s.cost || 0) * s.shares;
-    }
-  });
-
-  // Goal Tracker
-  const goalPct = Math.min(100, (totalValue / TARGET_GOAL) * 100);
-  document.getElementById('goalFill').style.width = goalPct + "%";
-  document.getElementById('goalPct').textContent = fmtNum(goalPct, 2) + "%";
-
-  document.getElementById('totalValue').textContent = fmtUsd(totalValue, 2);
-  const plEl = document.getElementById('totalPL');
-  if(totalCost > 0){
-    const pl = totalValue - totalCost;
-    const plPct = (pl/totalCost)*100;
-    plEl.innerHTML = `<span class="${pl>=0?'pos':'neg'}">${pl>=0?'▲':'▼'} ${fmtUsd(Math.abs(pl),2)} (${plPct>=0?'+':''}${fmtNum(plPct,2)}%)</span> <span class="neu">unrealized</span>`;
-  } else {
-    plEl.innerHTML = `<span class="neu">add cost basis to track P&L</span>`;
-  }
-
-  // Tax Calculations
-  let netST = 0, netLT = 0, anyGainData = false;
-  ASSETS.forEach(a => {
-    const s = state[a.symbol];
-    if(!s || !s.price || !s.shares || !s.cost) return;
-    const pl = (s.price - s.cost) * s.shares;
-    const held = daysHeld(s.purchaseDate);
-    if(held === null) return;
-    anyGainData = true;
-    if(held > 365) netLT += pl; else netST += pl;
-  });
-
-  const taxBody = document.getElementById('taxBody');
-  if(!anyGainData){
-    taxBody.innerHTML = `<div class="loading">Add purchase dates and cost bases to estimate potential exit taxes.</div>`;
-  } else {
-    const netted = netCapitalGains(netST, netLT);
-    const lossDeduction = Math.min(3000, netted.netLoss);
-    const effectiveWages = Math.max(0, taxSettings.wages - lossDeduction);
-    const impact = computeTaxImpact(effectiveWages, netted.stGain, netted.ltGain);
-    const totalGain = netted.stGain + netted.ltGain;
-    const netAfterTax = totalGain - impact.totalTax;
-    const effRate = totalGain > 0 ? (impact.totalTax/totalGain)*100 : 0;
-
-    taxBody.innerHTML = `
-      <div class="tax-grid">
-        <div class="tax-stat">
-          <div class="tax-stat-label">Net Short-Term</div>
-          <div class="tax-stat-val ${netST<0?'neg':''}">${netST<0?'-':''}${fmtUsd(Math.abs(netST),2)}</div>
-        </div>
-        <div class="tax-stat">
-          <div class="tax-stat-label">Net Long-Term</div>
-          <div class="tax-stat-val ${netLT<0?'neg':''}">${netLT<0?'-':''}${fmtUsd(Math.abs(netLT),2)}</div>
-        </div>
-        <div class="tax-stat">
-          <div class="tax-stat-label">Federal Tax</div>
-          <div class="tax-stat-val">${fmtUsd(impact.federalTotal,2)}</div>
-        </div>
-        <div class="tax-stat">
-          <div class="tax-stat-label">NYS + NYC Tax</div>
-          <div class="tax-stat-val">${fmtUsd(impact.nyTax + impact.nycTax,2)}</div>
-        </div>
-      </div>
-      <div class="tax-total-row">
-        <div>
-          <div class="tax-total-label">Estimated Tax Owed</div>
-          <div class="tax-total-val">${fmtUsd(impact.totalTax,2)}</div>
-        </div>
-        <div style="text-align:right;">
-          <div class="tax-total-label">Net Gain After Tax (${fmtNum(effRate,1)}%)</div>
-          <div class="tax-net-val">${fmtUsd(netAfterTax,2)}</div>
-        </div>
-      </div>
-    `;
-  }
-
-  // Allocation Bar
-  const allocBar = document.getElementById('allocBar');
-  const allocLegend = document.getElementById('allocLegend');
-  allocBar.innerHTML = ""; allocLegend.innerHTML = "";
-
-  ASSETS.forEach((a, i) => {
-    const s = state[a.symbol];
-    const value = (s && s.price && s.shares) ? s.price*s.shares : 0;
-    const pct = totalValue > 0 ? (value/totalValue)*100 : 0;
-
-    const seg = document.createElement('div');
-    seg.className = 'alloc-seg';
-    seg.style.width = pct + "%";
-    seg.style.background = COLORS[i % COLORS.length];
-    allocBar.appendChild(seg);
-
-    const row = document.createElement('div');
-    row.className = 'alloc-row';
-    row.innerHTML = `
-      <span class="alloc-name"><span class="dot" style="background:${COLORS[i%COLORS.length]}"></span>${a.symbol}</span>
-      <span class="alloc-pct">${fmtNum(pct,1)}%</span>
-    `;
-    allocLegend.appendChild(row);
-  });
-
-  // Asset Cards
-  ASSETS.forEach((a, i) => {
-    const s = state[a.symbol] || {};
-    const card = document.createElement('div');
-    card.className = 'card';
-
-    const hasPrice = !!s.price;
-    const value = (s.price && s.shares) ? s.price*s.shares : 0;
-    const cost = (s.cost && s.shares) ? s.cost*s.shares : 0;
-    const pl = value - cost;
-    const plPct = cost > 0 ? (pl/cost)*100 : null;
-    const pct = totalValue > 0 ? (value/totalValue)*100 : 0;
-    const circumference = 2*Math.PI*24;
-    const offset = circumference - (pct/100)*circumference;
-    const chg = s.chg24;
-
-    const held = daysHeld(s.purchaseDate);
-    let badgeHtml = `<span class="holding-badge unknown">Add purchase date</span>`;
-    
-    if(held !== null){
-      const isLT = held > 365;
-      badgeHtml = `<span class="holding-badge ${isLT?'lt':'st'}">${isLT?'Long-Term':'Short-Term'} · ${held}d held</span>`;
-    }
-
-    const hitTarget = s.targetPrice > 0 && s.price >= s.targetPrice;
-    if(hitTarget) {
-      badgeHtml += ` <span class="holding-badge hit">🎯 Target Triggered!</span>`;
-    }
-
-    const projVal = (s.targetPrice && s.shares) ? s.targetPrice * s.shares : 0;
-
-    card.innerHTML = `
-      <div class="card-top">
-        <div>
-          <div class="sym">${a.symbol}</div>
-          <div class="name">${a.name}</div>
-        </div>
-        <div class="chain-tag">${a.assetClass}</div>
-      </div>
-
-      <div class="price-row">
-        <div class="price">${hasPrice ? fmtUsd(s.price) : '···'}</div>
-        ${chg !== undefined && chg !== null ? `<div class="chg ${chg>=0?'pos':'neg'}">${chg>=0?'+':''}${fmtNum(chg,2)}%</div>` : ''}
-      </div>
-      ${badgeHtml}
-
-      <div class="divider"></div>
-
-      <div class="field-row">
-        <span class="field-label">Shares Held</span>
-        <input class="field-input" type="number" min="0" step="any" value="${s.shares || 0}" onblur="onFieldBlur('${a.symbol}', 'shares', this.value)">
-      </div>
-      <div class="field-row">
-        <span class="field-label">Avg Cost / Share</span>
-        <input class="field-input" type="number" min="0" step="any" value="${s.cost || 0}" onblur="onFieldBlur('${a.symbol}', 'cost', this.value)">
-      </div>
-      <div class="field-row">
-        <span class="field-label">Target Exit Price</span>
-        <input class="field-input" type="number" min="0" step="any" value="${s.targetPrice || 0}" onblur="onFieldBlur('${a.symbol}', 'targetPrice', this.value)">
-      </div>
-      <div class="field-row">
-        <span class="field-label">Purchase Date</span>
-        <input class="field-input" type="date" value="${s.purchaseDate || ''}" onblur="onFieldBlur('${a.symbol}', 'purchaseDate', this.value)" style="width:130px;">
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="stat-row"><span class="stat-label">Market Value</span><span class="stat-val">${hasPrice ? fmtUsd(value,2) : '—'}</span></div>
-      <div class="stat-row"><span class="stat-label">Projected Value at Target</span><span class="stat-val" style="color:var(--accent-gold);">${projVal > 0 ? fmtUsd(projVal,2) : '—'}</span></div>
-      <div class="stat-row">
-        <span class="stat-label">P&L</span>
-        <span class="stat-val ${plPct===null?'neu':(pl>=0?'pos':'neg')}">
-          ${(!hasPrice || plPct===null) ? '—' : `${pl>=0?'+':''}${fmtUsd(pl,2)} (${plPct>=0?'+':''}${fmtNum(plPct,2)}%)`}
-        </span>
-      </div>
-
-      <div class="ratio-wrap">
-        <div class="ratio-ring">
-          <svg width="58" height="58">
-            <circle class="ratio-ring-bg" cx="29" cy="29" r="24"></circle>
-            <circle class="ratio-ring-fg" cx="29" cy="29" r="24"
-              stroke="${COLORS[i%COLORS.length]}"
-              stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"></circle>
-          </svg>
-          <div class="ratio-ring-txt">${fmtNum(pct,0)}%</div>
-        </div>
-        <div>
-          <div class="ratio-label">Portfolio Weight</div>
-          <div class="ratio-sub">${a.symbol} proportion</div>
-        </div>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   loadPersisted();
+  renderLots();
+  renderCards();
   runSimulation();
-  render();
-  refreshAll();
-  setInterval(refreshAll, 60000);
-  document.getElementById('refreshBtn').addEventListener('click', refreshAll);
+  fetchAllPrices();
+  setInterval(fetchAllPrices, 60000);
 });
 </script>
 </body>
