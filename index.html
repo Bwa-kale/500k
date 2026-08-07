@@ -36,46 +36,61 @@
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
-    padding: 28px 18px 60px;
+    padding: 35px 18px 60px;
   }
 
   .wrap { max-width: 1100px; margin: 0 auto; }
 
-  /* Header */
+  /* Centered & Enlarge Header */
   header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 22px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+    margin-bottom: 30px;
   }
-  .brand { display: flex; flex-direction: column; gap: 4px; }
+  .brand { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    gap: 6px; 
+  }
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-size: 13px;
+    letter-spacing: 4px;
     color: var(--burgundy-glow);
     text-transform: uppercase;
+    font-weight: 700;
   }
   h1 {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: 28px;
-    letter-spacing: 1px;
+    font-size: 38px;
+    letter-spacing: 2px;
     background: linear-gradient(90deg, var(--white), #f7a8b8, var(--burgundy-glow));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-shadow: 0 0 20px rgba(201, 31, 66, 0.3);
   }
-  .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-sub); text-align: right; }
+  .meta-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-sub); }
   .refresh-btn {
     background: var(--burgundy-main);
     border: 1px solid var(--panel-border-bright);
     color: var(--white);
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    padding: 9px 16px;
+    padding: 9px 18px;
     border-radius: 8px;
     cursor: pointer;
     letter-spacing: 1px;
@@ -144,7 +159,10 @@
   .tax-card-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; }
   .wages-field { display: flex; align-items: center; gap: 10px; }
   .tax-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px; }
-  @media(max-width:760px){ .tax-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width:760px){ 
+    .tax-grid { grid-template-columns: repeat(2, 1fr); } 
+    h1 { font-size: 28px; }
+  }
 
   .tax-stat { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--panel-border); border-radius: 10px; padding: 12px 14px; }
   .tax-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
@@ -209,7 +227,7 @@
       <div class="eyebrow">◆ ROAD TO $500K 😊</div>
       <h1>$3,000 TO $500K ROAD</h1>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+    <div class="meta-controls">
       <button class="refresh-btn" id="refreshBtn">⟳ REFRESH PRICES</button>
       <div class="meta" id="lastUpdated">not yet updated</div>
     </div>
@@ -396,6 +414,7 @@ function persistTaxSettings(){
 }
 
 async function fetchStockPrice(symbol){
+  const defaults = { QQQM: 212.50, ASTS: 28.40 };
   try {
     const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`);
     if (!res.ok) throw new Error("HTTP " + res.status);
@@ -415,8 +434,7 @@ async function fetchStockPrice(symbol){
       const chg24 = prevClose ? ((price - prevClose) / prevClose) * 100 : 0;
       return { price, chg24 };
     } catch(e2) {
-      const defaults = { QQQM: 212.50, ASTS: 28.40 };
-      return { price: defaults[symbol] || 100.00, chg24: 0.85 };
+      return { price: defaults[symbol] || 100.00, chg24: 0.00 };
     }
   }
 }
@@ -669,13 +687,14 @@ function render(){
   });
 }
 
-// Initialization
-loadPersisted();
-render();
-refreshAll();
-setInterval(refreshAll, 60000);
-
-document.getElementById('refreshBtn').addEventListener('click', refreshAll);
+// Initialization with DOM safety
+document.addEventListener('DOMContentLoaded', () => {
+  loadPersisted();
+  render();
+  refreshAll();
+  setInterval(refreshAll, 60000);
+  document.getElementById('refreshBtn').addEventListener('click', refreshAll);
+});
 </script>
 </body>
 </html>
